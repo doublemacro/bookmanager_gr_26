@@ -1,18 +1,18 @@
 
-<html>
-  <head>
-    <title>Books List</title>
-  </head>
-  <body>
-    <h1>Hello, this is our selection of books:</h1>
-    <!--    unordered list. li -> list item. -->
-    <ul>
-    <!--      template jinja.-->
-      {% for book in books %}
-        <li>
-          {{ book.title }} - {{ book.content }}
-        </li>
-      {% endfor %}
-    </ul>
-  </body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Books List{% endblock %}
+
+{% block content %}
+  <h1>Hello, this is our selection of books:</h1>
+  <!--    unordered list. li -> list item. -->
+  <ul>
+  <!--      template jinja.-->
+    {% for book in books %}
+      <li>
+        {{ book.title }} - {{ book.content }}, by {{ book.author }}
+        <a href="{% url 'delete_book' book.id %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 
 from books.forms import BookForm
@@ -6,6 +6,8 @@ from books.models import Book
 from django.http.request import HttpRequest
 
 # Create your views here.
+# CRUD Actions
+# Create, Read, Update, Delete.
 
 def book_list(request: HttpRequest):
     # accesam baza de date, extragem cartile, si le afisam pe pagina html.
@@ -30,6 +32,14 @@ def create_book(request: HttpRequest):
         'form': form
     }
     return render(request, "books/book_form.html", context)
+
+def delete_book(request: HttpRequest, pk: int):
+    book = get_object_or_404(Book, pk=pk)
+    if request.method == "POST":
+        book.delete()
+        return redirect("book_list")
+    else:
+        return render(request, "books/book_confirm_delete.html", { "book": book })
 
 
 def hello_world(request: HttpRequest):
