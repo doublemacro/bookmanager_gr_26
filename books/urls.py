@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from . import views
 
@@ -9,3 +11,6 @@ urlpatterns = [
     path('book/<int:pk>/update/', views.update_book, name="update_book"),
     path('api_simple_endpoint/', views.simple_endpoint, name="simple"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
