@@ -10,10 +10,20 @@
   <!--      template jinja.-->
     {% for book in books %}
       <li>
-        {{ book.title }} - {{ book.content }}, by {{ book.author }}
-        <a href="{% url 'delete_book' book.id %}">🗑️</a>
-        <a href="{% url 'update_book' book.id %}">✍️</a>
+        <details>
+          <summary class="book_title" >
 
+            <span>{{ book.title }}</span>
+
+            <span>by {{ book.author }}</span>
+
+          </summary>
+          <div>
+            {{ book.content }}
+          </div>
+          <a href="{% url 'delete_book' book.id %}">🗑️</a>
+          <a href="{% url 'update_book' book.id %}">✍️</a>
+        </details>
       </li>
     {% endfor %}
   </ul>
