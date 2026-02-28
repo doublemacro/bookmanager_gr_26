@@ -11,7 +11,9 @@
     {% for book in books %}
       <li>
         {{ book.title }} - {{ book.content }}, by {{ book.author }}
-        <a href="{% url 'delete_book' book.id %}">Delete</a>
+        <a href="{% url 'delete_book' book.id %}">🗑️</a>
+        <a href="{% url 'update_book' book.id %}">✍️</a>
+
       </li>
     {% endfor %}
   </ul>

@@ -41,6 +41,26 @@ def delete_book(request: HttpRequest, pk: int):
     else:
         return render(request, "books/book_confirm_delete.html", { "book": book })
 
+def update_book(request: HttpRequest, pk: int):
+    # cartea care exista deja din baza de date
+    book = get_object_or_404(Book, pk=pk)
+
+    if request.method == "POST":
+        # request.POST = { "title": "Harry Potter1", "author": "Rowling" }
+        form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
+            return redirect("book_list")
+    else:
+        form = BookForm(instance=book)
+
+    return render(request, "books/book_form.html", {"form": form})
+
+def check_book_count(request: HttpRequest):
+    count = Book.objects.count()
+    return HttpResponse(count, status=200)
+
+
 
 def hello_world(request: HttpRequest):
     return render(request, "books/home.html")
