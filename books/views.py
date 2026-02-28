@@ -61,9 +61,5 @@ def check_book_count(request: HttpRequest):
     return HttpResponse(count, status=200)
 
 
-
-def hello_world(request: HttpRequest):
-    return render(request, "books/home.html")
-
 def simple_endpoint(request: HttpRequest):
     return HttpResponse("{ 'content': 'Hello this is my response to your request'}", status=202)
