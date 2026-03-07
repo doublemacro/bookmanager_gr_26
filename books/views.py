@@ -23,7 +23,9 @@ def create_book(request: HttpRequest):
         form = BookForm(request.POST)
         if form.is_valid():
             # aici se intampla salvarea in baza de date
-            form.save()
+            book = form.save(commit=False)
+            book.user = request.user
+            book.save()
             return redirect("book_list")
     else:
         form = BookForm()

@@ -26,7 +26,7 @@ def check_balance():
 # def check_balance():
 #     print(3000)
 
-USER_AUTHENTICATED = True
+USER_AUTHENTICATED = False
 check_balance()
 
 # var1 = my_decorator(check_balance)
