@@ -6,6 +6,11 @@
 {% block content %}
   <h1>Hello, this is our selection of books:</h1>
   <!--    unordered list. li -> list item. -->
+  <form action="/search" method="get" >
+    <label for="q">Search</label>
+    <input type="text" id="q" name="q" > <br>
+    <input type="submit" value="Submit">
+  </form>
   <ul>
   <!--      template jinja.-->
     {% for book in books %}
@@ -14,12 +19,12 @@
           <summary class="book_title" >
 
             <span>{{ book.title }}</span>
-
-            <span>by {{ book.author }}</span>
+            <a href="{% url 'user_books' book.user.id %}" >{{ book.user }}</a>
 
           </summary>
           <div>
             {{ book.content }}
+            <p>by {{ book.author }}</p>
           </div>
           <a href="{% url 'delete_book' book.id %}">🗑️</a>
           <a href="{% url 'update_book' book.id %}">✍️</a>
