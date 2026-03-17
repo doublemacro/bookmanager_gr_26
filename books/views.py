@@ -21,7 +21,7 @@ def book_list(request: HttpRequest):
 def create_book(request: HttpRequest):
     if request.method == "POST":
         # primim HTTP POST request cand se apasa pe butonul Save la create book.
-        form = BookForm(request.POST)
+        form = BookForm(request.POST, request.FILES)
         if form.is_valid():
             # aici se intampla salvarea in baza de date
             book = form.save(commit=False)
@@ -50,7 +50,7 @@ def update_book(request: HttpRequest, pk: int):
 
     if request.method == "POST":
         # request.POST = { "title": "Harry Potter1", "author": "Rowling" }
-        form = BookForm(request.POST, instance=book)
+        form = BookForm(request.POST, request.FILES, instance=book)
         if form.is_valid():
             form.save()
             return redirect("book_list")
