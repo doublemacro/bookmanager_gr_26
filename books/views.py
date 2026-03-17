@@ -6,15 +6,23 @@ from books.forms import BookForm
 from books.models import Book
 from django.http.request import HttpRequest
 
+from django.core.paginator import Paginator
+
 # Create your views here.
 # CRUD Actions
 # Create, Read, Update, Delete.
 
 def book_list(request: HttpRequest):
     # accesam baza de date, extragem cartile, si le afisam pe pagina html.
+    # Book.objects.all() -> QuerySet.
     books = Book.objects.all()
+
+    paginator = Paginator(books, 5)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        "books": books
+        "page_obj": page_obj
     }
     return render(request, "books/home.html", context)
 
