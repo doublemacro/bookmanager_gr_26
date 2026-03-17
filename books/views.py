@@ -5,6 +5,7 @@ from accounts.models import CustomUser
 from books.forms import BookForm
 from books.models import Book
 from django.http.request import HttpRequest
+from django.contrib.auth.decorators import login_required
 
 from django.core.paginator import Paginator
 
@@ -26,6 +27,7 @@ def book_list(request: HttpRequest):
     }
     return render(request, "books/home.html", context)
 
+@login_required
 def create_book(request: HttpRequest):
     if request.method == "POST":
         # primim HTTP POST request cand se apasa pe butonul Save la create book.
