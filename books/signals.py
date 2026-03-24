@@ -16,5 +16,14 @@ def my_signal_pre_save(sender, instance: Book, **kwargs):
 def cleanup_image(sender, instance: Book, **kwargs):
     # when a book is about to be deleted, also delete the image saved in the hard drive.
     if instance.image is not None:
-        if os.path.isfile(instance.image.path):
-            os.remove(instance.image.path)
+        try:
+            if os.path.isfile(instance.image.path):
+                os.remove(instance.image.path)
+        except ValueError as e:
+            # Silent try-catch.
+            pass
+
+        # second option:
+        # if instance.image.name is not None:
+        #     if os.path.isfile(instance.image.path):
+        #         os.remove(instance.image.path)
