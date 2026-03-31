@@ -1,6 +1,9 @@
 from django.db import models
 from accounts.models import CustomUser
 
+# comenzi de migrare cand se fac orice schimbari intr-un model
+# python manage.py makemigrations
+# python manage.py migrate
 # Create your models here.
 
 class Book(models.Model):
